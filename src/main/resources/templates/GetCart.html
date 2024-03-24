@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Shopping Cart/To-Do List</title>
+</head>
+
+<body>
+   <div class="image-container">
+      <a href="localhost:8080">
+         <img
+         src="/images/frieren-mimic.gif" alt="Click To Go Back To Menu"
+         height="150" width="150"
+         >
+      </a>
+      <div class="overlay-text">^Click To Go Back To Menu</div>
+   </div>
+   <h1>This is a list made utilising GET method</h1>
+   <h5>(The URL about to be mad long)</h5>
+
+   <form method="GET" action="/GetCart">
+
+      <input type="hidden" name="cart123" data-th-value="${newCart}">
+
+      <table>
+         <tr>
+            <td>Item:</td>
+            <td> <input type="text" name="item" size="20" required> </td>
+         </tr>
+         <tr>
+            <td>Quantity:</td>
+            <td> <input type="number" name="quantity" min="1"> </td>
+         </tr>
+         <tr>
+            <td></td>
+            <td>
+               <button type="submit"> Add </button>
+            </td>
+         </tr>
+      </table>
+   </form>
+
+   <div data-th-if="${#lists.isEmpty(cart)}">
+      <h3>Your cart is empty</h3>
+   </div>
+
+   <div data-th-unless="${#lists.isEmpty(cart)}">
+      <form method="GET" action="clearCart">
+         <button type="submit"> Clear Cart </button>
+      </form>
+      <h2>Items in Cart</h2>
+      <table>
+         <thead>
+            <tr>
+               <th>Item</th>
+               <th>Quantity</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr data-th-each="item: ${cart}">
+               <td> <span data-th-text="${item.item}"></span> </td>
+               <td> <span data-th-text="${item.quantity}"></span> </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</body>
+
+</html>
