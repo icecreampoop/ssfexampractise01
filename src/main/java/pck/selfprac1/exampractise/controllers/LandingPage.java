@@ -18,4 +18,10 @@ public class LandingPage {
     public String postCartDirectionHandler(Model model) {
         return "PostCart";
     }
+
+    @GetMapping(path = {"/backhome"})
+    public String goBackHomeHandler(){
+        return "redirect:/";
+    }
+
 }
